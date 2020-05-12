@@ -1,3 +1,60 @@
-<html>
-    <h1>Welcome</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ws test</title>
+    <script type="text/javascript" src="js/Bmob-2.2.4.min.js"></script>
+</head>
+<body>
+
+    <input style="width: 240px;height: 40px;" id="input" type="text" value="hello">
+
+
+<button style="width: 100px;height: 40px" onclick="add()">添加</button>
+
+<button style="width: 100px;height: 40px" onclick="deletedata()">删除</button>
+
+<button style="width: 100px;height: 40px" onclick="query()">查询</button>
+
+<script>
+    Bmob.initialize("0adfc14b3fbd6b86", "qweasd");
+
+    function add(){
+        
+        // Bmob.User.login('tan','123456').then(res => {
+        //     console.log(res)
+        // }).catch(err => {
+        //     console.log(err)
+        // });
+        var data = document.getElementById("input").value;
+        const query = Bmob.Query('data');
+        query.set("data",data)
+        query.save().then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+
+    function deletedata(){
+        var id = document.getElementById("input").value;
+        const query = Bmob.Query('data');
+        query.destroy(id).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    function query(){
+        const query = Bmob.Query("data");
+        query.find().then(res => {
+            console.log(res)
+        });
+    }
+
+</script>
+
+</body>
 </html>
